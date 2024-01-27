@@ -1,6 +1,6 @@
 <?php
 	include "components/header.php";
-
+	// меняем что-то на паре
 
 ?>
 	
