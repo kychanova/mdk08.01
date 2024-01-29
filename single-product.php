@@ -86,6 +86,18 @@
 		
 		}
 	}
+
+	else{
+		$prod_section = <<< _PROD
+		<div class="single-product mt-150 mb-150">
+		<div class="container">
+			<h2 style="text-align:center;">Не знаю, что делать</h2>
+		</div>
+		</div>
+		<!-- end single product -->
+
+_PROD;
+	}
 	
 	echo $prod_section;
 

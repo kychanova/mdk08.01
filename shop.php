@@ -13,6 +13,16 @@
 		$actual_cat = $_GET['category'];
 		$query .= " AND category_id=$actual_cat";
 	}
+
+	if (isset($_GET['btn'])){
+		if ($_GET['min_price']){
+			$query .= " AND price>=$_GET[min_price]";
+		}
+		if ($_GET['max_price']){
+			$query .= " AND price<=$_GET[max_price]";
+		}
+	}
+
 	// Выполнение итогового запроса к бд для получения всей информации о товарах
 	$result_prod = mysqli_query($conn, $query);
 	if (!$result_prod) echo("Big проблема");
@@ -22,7 +32,7 @@
 	$result_cat = mysqli_query($conn,$query);
 	if (!$result_cat) echo("Big проблема");
 
-
+	
 ?>
 	
 	<!-- breadcrumb-section -->
@@ -45,6 +55,9 @@
 					<ul>
 						<?php 
 							$class = $actual_cat == -1 ? 'active' : '';
+							echo "<pre>";
+							print_r($_GET);
+							echo "</pre>";
 						?>
 						
 						
@@ -66,6 +79,11 @@
 
 						?>
 					</ul>
+					<form>
+						<input type='number' name='min_price'>
+						<input type='number' name='max_price'>
+						<input type='submit' name='btn'>
+					</form>
 				</div>
             </div>
 
@@ -77,9 +95,6 @@
 
 					for ($i=0;$i<$num_rows;$i++){
 						$prod = mysqli_fetch_array($result_prod, MYSQLI_ASSOC);
-						echo "<pre>";
-						print_r($prod);
-						echo "</pre>";
 						$unit = strtolower($prod['unit_name']);
 						$prod_html = <<<_ITEM
 						
