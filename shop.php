@@ -77,16 +77,19 @@
 
 					for ($i=0;$i<$num_rows;$i++){
 						$prod = mysqli_fetch_array($result_prod, MYSQLI_ASSOC);
-						$price = strtolower($prod['unit_name']);
+						echo "<pre>";
+						print_r($prod);
+						echo "</pre>";
+						$unit = strtolower($prod['unit_name']);
 						$prod_html = <<<_ITEM
 						
 						<div class="">
 							<div class="single-product-item">
 								<div class="product-image">
-									<a href="single-product.html?prod_id=$prod[product_id]"><img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]"></a>
+									<a href="single-product.php?prod_id=$prod[product_id]"><img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]"></a>
 								</div>
 								<h3>$prod[product_name]</h3>
-								<p class="product-price"><span>За $price.</span> $prod[price]руб. </p>
+								<p class="product-price"><span>За $unit.</span> $prod[price]руб. </p>
 								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
 							</div>
 						</div>
