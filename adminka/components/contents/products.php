@@ -11,56 +11,83 @@
 		<div class="reg_form">
 			<h3>Добавить товар</h3>
 			<form method="POST" enctype="multipart/form-data">
-				<input type="text" name="name_prod" placeholder="Наименование товара">
-				<input type="number" name="qty" placeholder="Количество">
-				<input type="number" name="price" placeholder="Цена">
+				<input type="text" name="name_prod" placeholder="Наименование товара" required>
+				<input type="number" name="qty" placeholder="Количество" required>
+				<input type="number" step=0.01 name="price" placeholder="Цена" required>
 				<select name="category">
+					<option value="-1">Выберите категорию</option>
 				<?php
-					$str_out_cat="SELECT * FROM `category`";
-					$run_out_cat=mysqli_query($conn,$str_out_cat);
-					
+					$str_out_cat="SELECT * FROM `categories`";
+					$run_out_cat=mysqli_query($conn,$str_out_cat);	
+
 					while ($out_cat=mysqli_fetch_array($run_out_cat)) {
 						echo "<option value=$out_cat[category_id]>$out_cat[category_name]</option>";
 					}
 				?>	
 				</select><br><br>
+				<select name="unit">
+					<option value="-1">Выберите единицу измерения</option>
+				<?php
+					$str_out_cat="SELECT * FROM `units`";
+					$run_out_cat=mysqli_query($conn,$str_out_cat);	
+
+					while ($out_cat=mysqli_fetch_array($run_out_cat)) {
+						echo "<option value=$out_cat[unit_id]>$out_cat[unit_name]</option>";
+					}
+				?>	
+				</select><br><br>
 				Изображение:<br>
 				<input type="file" name="image"><br>
-				<textarea name="description" placeholder="Описание"></textarea><br>
+				<textarea name="description" placeholder="Описание" required></textarea><br>
 				<input type="submit" name="add_prod" value="Добавить товар">
 			</form>
 		</div>
 <?php
-	$name_prod=$_POST['name_prod'];
-	$qty=$_POST['qty'];
-	$price=$_POST['price'];
-	$code=$_POST['code'];
-	$category=$_POST['category'];
-	$image=$_POST['image'];
-	$description=$_POST['description'];
-	$add_prod=$_POST['add_prod'];
-	$name=$_FILES['image']['name'];
-	$type=$_FILES['image']['type'];
-	$tmp_name=$_FILES['image']['tmp_name'];
-	$size=$_FILES['image']['size'];
-	$full_path="../assets/img/products/$name";
-	$str_add_prod="INSERT INTO `products`(`code`, `name_prod`, `qty`, `price`, `id_category`, `img_prod`, `model`, `dimensions`, `country_prod`, `year_prod`, `color`, `guarantee`, `description`) VALUES ('$code','$name_prod','$qty','$price','$category','$name','Model','dimensions','country','5','color','guarantee','$description');";
-	if ($add_prod) {
-		// code...
-		if ($type=='image/jpeg') {
+
+	echo "<pre>";
+	print_r($_POST);
+	echo "</pre>";
+
+	echo "<pre>";
+	print_r($_FILES);
+	echo "</pre>";
+
+	if (isset($_POST['add_prod'])){
+		$name_prod=$_POST['name_prod'];
+		$qty=$_POST['qty'];
+		$price=$_POST['price'];
+		$category=$_POST['category'];
+		$unit=$_POST['unit'];
+		$description=$_POST['description'];
+	
+	
+		$name=strtolower($_FILES['image']['name']);
+		$type=$_FILES['image']['type'];
+		$tmp_name=$_FILES['image']['tmp_name'];
+		$size=$_FILES['image']['size'];
+		$full_path="../assets/img/products/$name";
+
+		
+	
+
+	
+	$str_add_prod="INSERT INTO `products`(product_name, category_id, unit_id, `description`,amount, image_path) VALUES ('$name_prod','$category', '$unit', '$description','$qty', '$name');";
+	
+	if ($type=='image/jpeg') {
 			if ($size<5900000) {
-				if ($name_prod) {
-					$run_add_prod=mysqli_query($connect,$str_add_prod);
+				if (($category==-1) || ($unit==-1)){
+					echo "Не выбрана категория или единица измерения";
+				}
+				else{
+					$run_add_prod=mysqli_query($conn,$str_add_prod);
+					echo 'результат запроса '.$run_add_prod;
 					if ($run_add_prod) {
 						echo "Запрос выполнен";
 						move_uploaded_file($tmp_name, $full_path);
 					}
-				}
-				else
-					{
-						echo "Заполните поля!";
-					}
-			}
+				
+				}}	
+			
 			else
 				{
 					echo "Слишком большой размер файла!";
@@ -71,6 +98,7 @@
 				echo "Неверный тип файла!";
 			}
 	}
+
 
 ?>
 

@@ -11,11 +11,15 @@
 		<div class="reg_form">
 			<h3>Добавить категорию</h3>
 			<form method="POST">
-				<input type="text" name="name_cat" placeholder="Наименование">
+				<input type="text" name="name_cat" placeholder="Наименование" required>
 				<input type="submit" name="add_cat" value="Добавить категорию">
 			</form>
 		</div>
 		<?php
+		echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
+
 			if (isset($_POST['add_cat'])){
 				$name_cat=$_POST['name_cat'];
 				$add_cat=$_POST['add_cat'];

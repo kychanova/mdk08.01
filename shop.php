@@ -12,6 +12,8 @@
 	if (isset($_GET['category'])){
 		$actual_cat = $_GET['category'];
 		$query .= " AND category_id=$actual_cat";
+
+		
 	}
 	// Выполнение итогового запроса к бд для получения всей информации о товарах
 	$result_prod = mysqli_query($conn, $query);
@@ -83,7 +85,7 @@
 						<div class="">
 							<div class="single-product-item">
 								<div class="product-image">
-									<a href="single-product.html?prod_id=$prod[product_id]"><img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]"></a>
+									<a href="single-product.php?prod_id=$prod[product_id]"><img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]"></a>
 								</div>
 								<h3>$prod[product_name]</h3>
 								<p class="product-price"><span>За $price.</span> $prod[price]руб. </p>

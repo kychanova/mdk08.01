@@ -1,6 +1,11 @@
 <?php
-error_reporting(0);
-require_once("../login.php");
+// error_reporting(0);
+
+$host = 'localhost';
+$db = 'frutkha';
+$user = 'root';
+$pass = '';
+
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 print_r($conn);
