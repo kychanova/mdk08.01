@@ -28,7 +28,7 @@
 	if (!$result_prod) echo("Big проблема");
 
 	// Получение всех категорий
-	$query = "SELECT * FROM categories";
+	$query = "SELECT * FROM categories WHERE view_status=1";
 	$result_cat = mysqli_query($conn,$query);
 	if (!$result_cat) echo("Big проблема");
 

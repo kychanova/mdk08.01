@@ -42,10 +42,10 @@
 						$view_status=$out_cat['view_status'];
 						switch ($view_status) {
 							case '1':
-								$view_status="Показан";
+								$view_status="Показана";
 								break;
 							case '0':
-								$view_status="Скрыт";
+								$view_status="Скрыта";
 								break;
 							
 							default:
