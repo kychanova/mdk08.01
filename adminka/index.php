@@ -1,8 +1,8 @@
 <?php
-	session_start();
-	if ($_SESSION['user']) {
-		header("Location:dashboard.php");
-	}
+	// session_start();
+	// if ($_SESSION['user']) {
+	// 	header("Location:dashboard.php");
+	// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Админпанель</title>
-	<link rel="stylesheet" type="text/css" href="assets/styles.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 </head>
 <body>
 	<div class="auth">
@@ -21,11 +21,11 @@
 			<input type="submit" name="auth" value="Войти">
 		</form>
 		<?php
-			echo $_SESSION['message'];
+			// echo $_SESSION['message'];
 			
-			if($_SESSION['message']){
-				session_unset();
-			}
+			// if($_SESSION['message']){
+			// 	session_unset();
+			// }
 		?>
 	</div>
 </body>
