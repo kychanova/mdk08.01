@@ -69,7 +69,7 @@
 	$tmp_name=$_FILES['image']['tmp_name'];
 	$size=$_FILES['image']['size'];
 	$full_path="../assets/img/products/$name";
-	$str_add_prod="INSERT INTO `products`( `product_name`, category_id, unit_id, amount, `description`) VALUES ('$name_prod','$category','$unit','$qty','$description');";
+	$str_add_prod="INSERT INTO `products`( `product_name`, category_id, unit_id, amount, `description`, `image_path`) VALUES ('$name_prod','$category','$unit','$qty','$description', $name);";
 	if ($add_prod) {
 		// code...
 		if ($type=='image/jpeg') {
