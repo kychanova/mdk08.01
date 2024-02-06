@@ -52,6 +52,8 @@
 			</form>
 		</div>
 <?php
+
+if(isset($_POST['add_prod'])){
 	$name_prod=$_POST['name_prod'];
 	$qty=$_POST['qty'];
 	$price=$_POST['price'];
@@ -69,7 +71,7 @@
 	$tmp_name=$_FILES['image']['tmp_name'];
 	$size=$_FILES['image']['size'];
 	$full_path="../assets/img/products/$name";
-	$str_add_prod="INSERT INTO `products`( `product_name`, category_id, unit_id, amount, `description`, `image_path`) VALUES ('$name_prod','$category','$unit','$qty','$description', $name);";
+	$str_add_prod="INSERT INTO `products`( `product_name`, category_id, unit_id, amount, `description`, `image_path`) VALUES ('$name_prod','$category','$unit','$qty','$description', '$name');";
 	if ($add_prod) {
 		// code...
 		if ($type=='image/jpeg') {
@@ -96,6 +98,7 @@
 				echo "Неверный тип файла!";
 			}
 	}
+}
 
 ?>
 
@@ -103,76 +106,62 @@
 		<table>
 			<tr>
 				<th>№ п/п</th>
-				<th>Артикул</th>
 				<th>Наименование</th>
 				<th>Кол-во</th>
-				<th>Цена</th>
 				<th>Категория</th>
-				<th>Изображение</th>
-				<th>Статус</th>
+				<th>Единица измерения</th>
 				<th colspan="3">Действия</th>
 			</tr>
 			
 			
 			<?php
-				$str_out_prod="SELECT * FROM `products`";
-				$run_out_prod=mysqli_query($connect,$str_out_prod);
+				$str_out_prod="SELECT * FROM `products` as p JOIN categories as c ON p.category_id=c.category_id JOIN units as u ON u.unit_id=p.unit_id;";
+				$run_out_prod=mysqli_query($conn,$str_out_prod);
 				while ($out_prod=mysqli_fetch_array($run_out_prod)) {
-					$status_prod=$out_prod['status'];
+					// $status_prod=$out_prod['status'];
 
-					switch ($status_prod) {
-						case '1':
-							$status_prod="Выставлен";
-							$action_text="Убрать";
-							break;
-						case '0':
-							$status_prod="Убран";
-							$action_text="Поставить";
+					// switch ($status_prod) {
+					// 	case '1':
+					// 		$status_prod="Выставлен";
+					// 		$action_text="Убрать";
+					// 		break;
+					// 	case '0':
+					// 		$status_prod="Убран";
+					// 		$action_text="Поставить";
 
-							break;
-						default:
-							// code...
-							break;
-					};
+					// 		break;
+					// 	default:
+					// 		// code...
+					// 		break;
+					// };
 
-					$str_out_cat="SELECT * FROM `category` WHERE `id`='$out_prod[id_category]'";
-					$run_out_cat=mysqli_query($connect,$str_out_cat);
+					// $str_out_cat="SELECT * FROM `category` WHERE `id`='$out_prod[id_category]'";
+					// $run_out_cat=mysqli_query($connect,$str_out_cat);
 					
-					$out_cat=mysqli_fetch_array($run_out_cat);
-
-
-
-
-
+					// $out_cat=mysqli_fetch_array($run_out_cat);
 					echo "
 						<tr>
-							<td>$out_prod[id]</td>
-							<td>$out_prod[code]</td>
-							<td>$out_prod[name_prod]</td>
-							<td>$out_prod[qty]</td>
-							<td>$out_prod[price] руб</td>
-							<td>$out_cat[name_cat]</td>
-							<td>$status_prod</td>
+							<td>$out_prod[product_id]</td>
+							<td>$out_prod[product_name]</td>
+							<td>$out_prod[amount]</td>
+							<td>$out_prod[category_name]</td>
+							<td>$out_prod[unit_name]</td>
 							<td>
-								<a href='controllers/edit_status.php?edit_status_prod=$out_prod[id]' class='off'>
-									$action_text
+								<a href='' class='off'>
+									Скрыть
 								</a>	
 							</td>
 							<td>
-								<a href='edit_products.php?edit_prod=$out_prod[id]' class='change'>
+								<a href='change_products.php?product_id=$out_prod[product_id]' class='change'>
 									Изменить
 								</a>	
 							</td>
 							<td>
-								<a href='controllers/del.php?del_prod=$out_prod[id]' class='delete'>
+								<a href='' class='delete'>
 									Удалить
 								</a>	
 							</td>
 						</tr>
-			
-
-
-
 					";
 
 

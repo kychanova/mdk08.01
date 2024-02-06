@@ -40,26 +40,30 @@
 					
 					while ($out_cat=mysqli_fetch_array($run_out_cat)) {
 						$view_status=$out_cat['view_status'];
+						$action='';
 						switch ($view_status) {
 							case '1':
-								$view_status="Показана";
+								$v_status="Показана";
+								$action = "Скрыть";
 								break;
 							case '0':
-								$view_status="Скрыта";
+								$v_status="Скрыта";
+								$action = "Показать";
 								break;
 							
 							default:
-								// code...
+								$v_status = "Я не знаю";
+								$action = "Узнать";
 								break;
 						}
 						echo "
 						<tr>
 							<td>$out_cat[category_id]</td>
 							<td>$out_cat[category_name]</td>
-							<td>$view_status</td>
+							<td>$v_status</td>
 							<td>
-								<a href='' class=off>
-									Не показывать
+								<a href='controllers/change_status.php?category_id=$out_cat[category_id]' class=off>
+									$action
 								</a>	
 							</td>
 							<td>
@@ -68,7 +72,7 @@
 								</a>	
 							</td>
 							<td>
-								<a href='controllers/del.php?del_cat=$out_cat[category_id]' class=delete>
+								<a href='controllers/delete.php?category_id=$out_cat[category_id]' class=delete>
 									Удалить
 								</a>	
 							</td>
