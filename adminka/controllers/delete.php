@@ -6,6 +6,14 @@ if (isset($_GET['prod_id']) && isset($_GET['date'])){
         $query = "DELETE FROM prices WHERE product_id='$_GET[prod_id]' AND date_start='$_GET[date]'";
         $res = mysqli_query($conn, $query);
     }
+    header("Location:../prices.php");
 }
 
-header("Location:../prices.php");
+if (isset($_GET['cat_id'])){
+    if ($_GET['cat_id']){
+        $query = "DELETE FROM categories WHERE category_id='$_GET[cat_id]'";
+        $res = mysqli_query($conn, $query);
+    }
+    header("Location:../categories.php");
+}
+

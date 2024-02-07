@@ -46,14 +46,17 @@
 						$view_status=$out_cat['view_status'];
 						switch ($view_status) {
 							case '1':
-								$view_status="Показан";
+								$view_status="Показана";
+								$action = "Скрыть";
 								break;
 							case '0':
-								$view_status="Скрыт";
+								$view_status="Скрыта";
+								$action = "Показать";
 								break;
 							
 							default:
-								// code...
+							$view_status="Статус неизвестен";
+							$action = "Удалить сайт";
 								break;
 						}
 						echo "
@@ -62,8 +65,8 @@
 							<td>$out_cat[category_name]</td>
 							<td>$view_status</td>
 							<td>
-								<a href='' class=off>
-									Не показывать
+								<a href='controllers/change_status.php?cat_id=$out_cat[category_id]' class=off>
+									$action
 								</a>	
 							</td>
 							<td>
@@ -72,7 +75,7 @@
 								</a>	
 							</td>
 							<td>
-								<a href='controllers/del.php?del_cat=$out_cat[category_id]' class=delete>
+								<a href='controllers/delete.php?cat_id=$out_cat[category_id]' class=delete>
 									Удалить
 								</a>	
 							</td>
