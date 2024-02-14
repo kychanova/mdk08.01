@@ -1,8 +1,11 @@
 <?php
-	// session_start();
-	// if ($_SESSION['user']) {
-	// 	header("Location:dashboard.php");
-	// }
+session_start();
+
+if (isset($_SESSION['isAdmin'])){
+	if($_SESSION['isAdmin']){
+		header("Location:dashboard.php");
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,17 +19,15 @@
 	<div class="auth">
 		<h2>Панель<br>администратора</h2>
 		<form action="controllers/auth.php" method="POST">
-			<input type="text" name="login_auth" placeholder="Логин"><br>
+			<?php 
+				$message = $_SESSION['error_message'] ?? '';
+				echo "<p>$message</p>";
+				unset($_SESSION['error_message']);
+			?>
+			<input type="email" name="email" placeholder="Логин"><br>
 			<input type="password" name="pass_auth" placeholder="Пароль"><br>
 			<input type="submit" name="auth" value="Войти">
 		</form>
-		<?php
-			// echo $_SESSION['message'];
-			
-			// if($_SESSION['message']){
-			// 	session_unset();
-			// }
-		?>
 	</div>
 </body>
 </html>

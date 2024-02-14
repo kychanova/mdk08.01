@@ -1,9 +1,13 @@
 <?php
-// session_start();
-// if (!$_SESSION['user']) {
-// 		header("Location:/adminka");
-// 	}
+session_start();
 include './../controllers/connect.php';
+
+if (!isset($_SESSION['isAdmin'])){
+	if (!$_SESSION['isAdmin']){
+		header("Location:index.php");
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html>
