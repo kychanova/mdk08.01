@@ -89,31 +89,37 @@
 
 			<div class="product_grid">
 				<?php
-					// strtolower - приведение к нижнему регистру
-
+					// получаем количество строк в запросе
 					$num_rows = mysqli_num_rows($result_prod);
-
+					
+					// проходим в цикле по каждой строке
 					for ($i=0;$i<$num_rows;$i++){
+						// получаем следующую строку запроса
 						$prod = mysqli_fetch_array($result_prod, MYSQLI_ASSOC);
-						$unit = strtolower($prod['unit_name']);
+
+						// формируем карточку одного товара
 						$prod_html = <<<_ITEM
 						
 						<div class="">
 							<div class="single-product-item">
 								<div class="product-image">
-									<a href="single-product.php?prod_id=$prod[product_id]"><img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]"></a>
+									<a href="single-product.php?prod_id=$prod[product_id]">
+										<img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]">
+									</a>
 								</div>
 								<h3>$prod[product_name]</h3>
-								<p class="product-price"><span>За $unit.</span> $prod[price]руб. </p>
-								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
+								<p class="product-price"><span>За $prod[unit].</span> $prod[price]руб. </p>
+								<a href="cart.html" class="cart-btn">
+									<i class="fas fa-shopping-cart"></i> Добавить в корзину
+								</a>
 							</div>
 						</div>
 
 						_ITEM;
+						//выводим её
 						echo $prod_html;
 					}
 				?>
-
 			</div>
 
 			<div class="row">

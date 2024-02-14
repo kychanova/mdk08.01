@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <content>
 	<nav>
 		<a href="dashboard.php">Главная панель</a>
@@ -16,6 +20,9 @@
 			</form>
 		</div>
 		<?php
+			echo "<pre>";
+			print_r($_SESSION);
+			echo "</pre>";
 			if (isset($_POST['add_cat'])){
 				$name_cat=$_POST['name_cat'];
 				$add_cat=$_POST['add_cat'];
