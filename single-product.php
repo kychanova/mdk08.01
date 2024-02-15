@@ -22,6 +22,7 @@
 	if (isset($_GET['prod_id'])){
 		$prod_id = $_GET['prod_id'];
 
+		// Формируем запрос к бд для получения товара
 		$query = "SELECT * FROM products as p JOIN units as u ON p.unit_id=u.unit_id 
 				  JOIN categories as c ON c.category_id=p.category_id 
 				  JOIN  prices ON prices.product_id=p.product_id
@@ -29,10 +30,11 @@
 				  date_start <= CURRENT_TIMESTAMP AND 
 				  date_start = (select max(date_start) from prices where prices.product_id = p.product_id)";
 		
+		// Отправляем запрос в бд
 		$res = mysqli_query($conn, $query);
 		if (!$res) echo 'горееееееееееее';
 
-		//Значение по умолчанию
+		//
 		$prod_section = <<< _PROD
 					<div class="single-product mt-150 mb-150">
 					<div class="container">

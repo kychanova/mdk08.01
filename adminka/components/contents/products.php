@@ -1,11 +1,4 @@
-<content>
-	<nav>
-		<a href="dashboard.php">Главная панель</a>
-		<a href="users.php">Пользователи</a>
-		<a href="categories.php">Категории товаров</a>
-		<a href="products.php">Товары</a>
-		<a href="orders.php">Заказы</a>
-	</nav>
+
 	<article>
 		<h2>Товары</h2>
 		<div class="reg_form">
@@ -13,10 +6,20 @@
 			<form method="POST" enctype="multipart/form-data">
 				<input type="text" name="name_prod" placeholder="Наименование товара">
 				<input type="number" name="qty" placeholder="Количество">
-				<input type="number" name="price" placeholder="Цена">
+				<input type="number" step="0.01" name="price" placeholder="Цена">
+				<select name="unit">
+				<?php
+					$str_out_unit="SELECT * FROM `units`";
+					$run_out_unit=mysqli_query($conn,$str_out_unit);
+					
+					while ($out_unit=mysqli_fetch_array($run_out_unit)) {
+						echo "<option value=$out_unit[unit_id]>$out_unit[unit_name]</option>";
+					}
+				?>	
+				</select>
 				<select name="category">
 				<?php
-					$str_out_cat="SELECT * FROM `category`";
+					$str_out_cat="SELECT * FROM `categories`";
 					$run_out_cat=mysqli_query($conn,$str_out_cat);
 					
 					while ($out_cat=mysqli_fetch_array($run_out_cat)) {
@@ -31,45 +34,47 @@
 			</form>
 		</div>
 <?php
-	$name_prod=$_POST['name_prod'];
-	$qty=$_POST['qty'];
-	$price=$_POST['price'];
-	$code=$_POST['code'];
-	$category=$_POST['category'];
-	$image=$_POST['image'];
-	$description=$_POST['description'];
-	$add_prod=$_POST['add_prod'];
-	$name=$_FILES['image']['name'];
-	$type=$_FILES['image']['type'];
-	$tmp_name=$_FILES['image']['tmp_name'];
-	$size=$_FILES['image']['size'];
-	$full_path="../assets/img/products/$name";
-	$str_add_prod="INSERT INTO `products`(`code`, `name_prod`, `qty`, `price`, `id_category`, `img_prod`, `model`, `dimensions`, `country_prod`, `year_prod`, `color`, `guarantee`, `description`) VALUES ('$code','$name_prod','$qty','$price','$category','$name','Model','dimensions','country','5','color','guarantee','$description');";
-	if ($add_prod) {
-		// code...
-		if ($type=='image/jpeg') {
-			if ($size<5900000) {
-				if ($name_prod) {
-					$run_add_prod=mysqli_query($connect,$str_add_prod);
-					if ($run_add_prod) {
-						echo "Запрос выполнен";
-						move_uploaded_file($tmp_name, $full_path);
+	if (isset($_POST['add_prod'])){
+		$name_prod=$_POST['name_prod'];
+		$qty=$_POST['qty'];
+		$price=$_POST['price'];
+		$category=$_POST['category'];
+		$unit = $_POST['unit'];
+		$description=$_POST['description'];
+		$add_prod=$_POST['add_prod'];
+
+		$name=$_FILES['image']['name'];
+		$type=$_FILES['image']['type'];
+		$tmp_name=$_FILES['image']['tmp_name'];
+		$size=$_FILES['image']['size'];
+		$full_path="../assets/img/products/$name";
+		$str_add_prod="INSERT INTO `products`(product_name, category_id, unit_id, image_path, `description`) VALUES ($name_prod, $category, $unit, $name, $description);";
+		if ($add_prod) {
+			// code...
+			if ($type=='image/jpeg') {
+				if ($size<5900000) {
+					if ($name_prod) {
+						$run_add_prod=mysqli_query($connect,$str_add_prod);
+						if ($run_add_prod) {
+							echo "Запрос выполнен";
+							move_uploaded_file($tmp_name, $full_path);
+						}
 					}
+					else
+						{
+							echo "Заполните поля!";
+						}
 				}
 				else
 					{
-						echo "Заполните поля!";
+						echo "Слишком большой размер файла!";
 					}
 			}
 			else
 				{
-					echo "Слишком большой размер файла!";
+					echo "Неверный тип файла!";
 				}
 		}
-		else
-			{
-				echo "Неверный тип файла!";
-			}
 	}
 
 ?>
