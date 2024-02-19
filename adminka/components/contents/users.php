@@ -1,3 +1,7 @@
+<?php
+	$ai = "aria-invalid='true'";
+?>
+
 <content>
 	<nav>
 		<a href="dashboard.php">Главная панель</a>
@@ -11,7 +15,7 @@
 		<div class="reg_form">
 			<h3>Добавить пользователя</h3>
 			<form method="POST" enctype="multipart/form-data" action="controllers/registration.php">
-				<input type="text" name="surname" placeholder="Фамилия">
+				<input type="text" name="surname" placeholder="Фамилия" aria-invalid="true">
 				<input type="text" name="name" placeholder="Имя">
 				<input type="text" name="l_name" placeholder="Отчество">
 				<input type="text" name="mail" placeholder="Электронная почта">
@@ -42,60 +46,25 @@
 				<th>№ п/п</th>
 				<th>Фамилия</th>
 				<th>Имя</th>
-				<th>Отчество</th>
-				<th>Логин</th>
 				<th>Почта</th>
 				<th>Роль</th>
-				<th>Статус</th>
 				<th colspan="3">Действия</th>
 			</tr>
 <?php
-	$str_out_users="SELECT * FROM `users`";
-	$run_out_users=mysqli_query($connect,$str_out_users);
+	$str_out_users="SELECT * FROM `clients` JOIN `credentials` ON clients.client_id=credentials.client_id JOIN roles ON roles.role_id=credentials.role_id";
+	$run_out_users=mysqli_query($conn,$str_out_users);
 	while ($out_users=mysqli_fetch_array($run_out_users)) {
-		$role_user=$out_users['role'];
-		$status_user=$out_users['status'];
-
-
-		switch ($role_user) {
-			case '0':
-				$role_user="Пользователь";
-				break;
-			case '1':
-				$role_user="Модератор";
-				break;
-			case '2':
-				$role_user="Администратор";
-				break;
-			default:
-				break;
-		}
-
-		switch ($status_user) {
-			case '0':
-				$status_user="Отключен";
-				$name_but="Включить";
-				break;
-			case '1':
-				$status_user="Активный";
-				$name_but="Выключить";
-				break;
-			default:
-				break;
-		}
+		$role_user=$out_users['role_id'];
 		echo "
 			<tr>
-				<td>$out_users[id]</td>
-				<td>$out_users[surname]</td>
-				<td>$out_users[name]</td>
-				<td>$out_users[l_name]</td>
-				<td>$out_users[login]</td>
-				<td>$out_users[mail]</td>
-				<td>$role_user</td>
-				<td>$status_user</td>
+				<td>$out_users[client_id]</td>
+				<td>$out_users[last_name]</td>
+				<td>$out_users[first_name]</td>
+				<td>$out_users[email]</td>
+				<td>$out_users[role_name]</td>
 				<td>
-					<a href='controllers/edit_status.php?edit_status_user=$out_users[id]' class=off>
-						$name_but
+					<a href='' class=off>
+						Скрыть
 					</a>	
 				</td>
 				<td>
@@ -104,7 +73,7 @@
 					</a>	
 				</td>
 				<td>
-					<a href='controllers/del.php?del_user=$out_users[id]' class=delete>
+					<a href='' class=delete>
 						Удалить
 					</a>	
 				</td>

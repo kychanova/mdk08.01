@@ -1,5 +1,4 @@
 <?php
-include "connect.php";
 include "components/header.php";
 
 
@@ -20,6 +19,6 @@ include "components/header.php";
     <form action='controllers/auth_.php' method='POST' id="auth-form">
         <input type='email' name='email' id='email' placeholder='Email' required>
         <input type='password' name='password' id='password' placeholder='Пароль' required>
-        <input type='email' name='email' id='email' placeholder='Email' required>
+        <input type='submit' name='btn' id='btn' >
     </form>
 </div>

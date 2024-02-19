@@ -2775,3 +2775,25 @@ table.order-details tbody td {
   flex-direction: column;
 
 }
+
+/* -----------------------------------------------------------------------------
+
+# Registration Page Styles
+
+----------------------------------------------------------------------------- */
+.reg-section{
+  display:flex;
+  justify-content: center;
+
+  padding-block:50px;
+}
+
+.reg-form{
+  display:flex;
+  flex-direction: column;
+}
+
+.reg-btn{
+  border-radius:1px;
+  margin:10px;
+}

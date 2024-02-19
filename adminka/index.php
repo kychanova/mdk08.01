@@ -24,7 +24,7 @@ if (isset($_SESSION['isAdmin'])){
 				echo "<p>$message</p>";
 				unset($_SESSION['error_message']);
 			?>
-			<input type="email" name="email" placeholder="Логин"><br>
+			<input type="text" name="email" placeholder="Логин"><br>
 			<input type="password" name="pass_auth" placeholder="Пароль"><br>
 			<input type="submit" name="auth" value="Войти">
 		</form>
