@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!$_SESSION['isAdmin']) {
+if (!isset($_SESSION['isAdmin'])) {
 		header("Location:/adminka");
-	}
+}
 include './../controllers/connect.php';
 ?>
 <!DOCTYPE html>

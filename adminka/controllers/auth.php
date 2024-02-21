@@ -5,12 +5,14 @@ include "../../controllers/connect.php";
 $email = $_POST['email'];
 $pass = $_POST['pass_auth'];
 
-$query = "SELECT * FROM credentials WHERE `email`='$email' AND `password`='$pass'";
-$res = mysqli_query($conn, $query);
+$query = "SELECT * FROM credentials WHERE `email`=? AND `password`=? AND role_id=1";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "ss", $email, $pass);
+mysqli_stmt_execute($stmt);
 
-print_r($res);
+mysqli_stmt_store_result($stmt);
 
-$num_rows = mysqli_num_rows($res);
+$num_rows = mysqli_stmt_num_rows($stmt);
 
 if ($num_rows>0){
     $_SESSION['isAdmin'] = true;

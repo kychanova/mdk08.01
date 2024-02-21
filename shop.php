@@ -71,7 +71,7 @@
 								$name = mb_convert_case($cat['category_name'], MB_CASE_TITLE, 'UTF-8');
 								$html = <<<_ITEM
 
-								<li class="$class"><a href='shop.php?category=$cat[category_id]'>$name</a></li>
+								<li class="active"><a href='shop.php?category=$cat[category_id]'>$name</a></li>
 
 								_ITEM;
 								echo $html;
