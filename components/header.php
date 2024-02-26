@@ -1,5 +1,7 @@
 <?php
+	session_start();
 	require_once "./controllers/connect.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,6 +91,7 @@
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.html"><i class="fas fa-shopping-cart"></i></a>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+										<a class="mobile-hide search-bar-icon" href="personal.php"><i class="fas fa-user"></i></a>
 									</div>
 								</li>
 							</ul>
@@ -121,3 +124,18 @@
 		</div>
 	</div>
 	<!-- end search area -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- title -->
+	<!--<title>Fruitkha</title>
+
+</head>
+<body>
+	<header>
+		<h1>
+			Header
+	</h1>
+	</header> -->

@@ -16,9 +16,10 @@ include "components/header.php";
 </div>
 
 <div class="auth-section container">
-    <form action='controllers/auth_.php' method='POST' id="auth-form">
+    <form action='controllers/auth.php' method='POST' class="auth-form">
         <input type='email' name='email' id='email' placeholder='Email' required>
         <input type='password' name='password' id='password' placeholder='Пароль' required>
+        <p>Вы ещё не с нами? <a href="register.php">Зарегистрируйтесь</a></p>
         <input type='submit' name='btn' id='btn' >
     </form>
 </div>

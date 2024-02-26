@@ -2767,13 +2767,15 @@ table.order-details tbody td {
 
 ----------------------------------------------------------------------------- */
 .auth-section{
-  margin-top:20px;
+  padding-block:20px;
+  display:flex;
+  justify-content: center;
 }
 
 .auth-form{
   display:flex;
   flex-direction: column;
-
+  gap:10px;
 }
 
 /* -----------------------------------------------------------------------------
