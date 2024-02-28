@@ -38,7 +38,7 @@ if ($_POST['btn']){
                 else{
                     $query = "INSERT INTO clients(first_name, last_name) VALUES (?, ?)";
                     $stmt = mysqli_prepare($conn, $query);
-                    mysqli_stmt_bind_param($stmt, "ss", $_POST['first-name'], $_POST['last-name']);
+                    mysqli_stmt_bind_param($stmt, "ss", $_POST['first-name'], $_POST['second-name']);
                     if (mysqli_stmt_execute($stmt)){
                         $query = "INSERT INTO credentials(client_id, email, `password`, role_id) VALUES (?,?,?, 2)";
                         $inserted_id = mysqli_stmt_insert_id($stmt);

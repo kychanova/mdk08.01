@@ -13,7 +13,7 @@ $res = mysqli_stmt_get_result($stmt);
 if ($user = mysqli_fetch_array($res)){
     if (password_verify($pass,$user['password'])){
         $_SESSION['user'] = $user['client_id'];
-        header("Location:../personal.php");
+        header("Location:../account.php");
     }
     else{
         $_SESSION['error_message'] = "Неверные логин или пароль";

@@ -64,7 +64,9 @@
 									<form action="index.html">
 										<input type="number" placeholder="0">
 									</form>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+									<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
+									<a href="checkout.php?prod_id=$prod[product_id]" class="cart-btn"> Купить</a>
+									
 									<p><strong>Категория: </strong><a href="shop.php?category=$prod[category_id]">$prod[category_name]</a></p>
 								</div>
 								<h4>Share:</h4>
