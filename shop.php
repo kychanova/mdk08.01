@@ -55,7 +55,7 @@
 							$num_rows = mysqli_num_rows($result_cat);
 
 							for ($i=0;$i<$num_rows;$i++){
-								$cat = mysqli_fetch_array($result_cat, MYSQLI_ASSOC);
+								$cat = mysqli_fetch_array($result_cat);
 								$class = $cat['category_id'] == $actual_cat ? 'active' : '';
 								$name = mb_convert_case($cat['category_name'], MB_CASE_TITLE, 'UTF-8');
 								$html = <<<_ITEM
@@ -78,8 +78,8 @@
 					$num_rows = mysqli_num_rows($result_prod);
 
 					for ($i=0;$i<$num_rows;$i++){
-						$prod = mysqli_fetch_array($result_prod, MYSQLI_ASSOC);
-						$price = strtolower($prod['unit_name']);
+						$prod = mysqli_fetch_array($result_prod);
+						$unit = strtolower($prod['unit_name']);
 						$prod_html = <<<_ITEM
 						
 						<div class="">
@@ -88,7 +88,7 @@
 									<a href="single-product.php?prod_id=$prod[product_id]"><img src="assets/img/products/$prod[image_path]" alt="$prod[product_name]"></a>
 								</div>
 								<h3>$prod[product_name]</h3>
-								<p class="product-price"><span>За $price.</span> $prod[price]руб. </p>
+								<p class="product-price"><span>За $unit.</span> $prod[price]руб. </p>
 								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
 							</div>
 						</div>
