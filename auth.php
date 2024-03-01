@@ -17,9 +17,17 @@ include "components/header.php";
 
 <div class="auth-section container">
     <form action='controllers/auth.php' method='POST' class="auth-form">
+        <small>
+            <?php
+                $error_mes = $_SESSION['error_message'] ?? '';
+                echo $error_mes;
+
+                unset($_SESSION['error_message']);
+            ?>
+        </small>
         <input type='email' name='email' id='email' placeholder='Email' required>
         <input type='password' name='password' id='password' placeholder='Пароль' required>
-        <p>Вы ещё не с нами? <a href="register.php">Зарегистрируйтесь</a></p>
+        <p>Вы ещё не с нами? <a href="registr.php">Зарегистрируйтесь</a></p>
         <input type='submit' name='btn' id='btn' >
     </form>
 </div>

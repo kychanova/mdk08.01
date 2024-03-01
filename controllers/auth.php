@@ -14,14 +14,17 @@ $res = mysqli_stmt_get_result($stmt);
 if( $user = mysqli_fetch_array($res)){
     if (password_verify($pass, $user['password'])){
         $_SESSION['user'] = $user['client_id'];
+        echo 'всё хорошо';
         header("Location:../personal.php");
     }
     else{
         $_SESSION['error_message'] = "Неверные логин или пароль";
+        echo 'всё плохо';
         header("Location:../auth.php");
     }
 }
 else{
     $_SESSION['error_message'] = "Неверные логин или пароль";
-        header("Location:../auth.php");
+    echo 'всё плохо2';
+    header("Location:../auth.php");
 }

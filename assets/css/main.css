@@ -2799,3 +2799,104 @@ table.order-details tbody td {
   border-radius:1px;
   margin:10px;
 }
+
+
+/* -----------------------------------------------------------------------------
+
+# Account Page Styles
+
+----------------------------------------------------------------------------- */
+:root{
+  --gap-between-account-items:20px;
+}
+
+.account-section{
+  padding:20px;
+}
+
+.account-item{
+  width: calc((100% - var(--gap-between-account-items))/3);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+  border-radius: 15px;
+  padding:20px;
+
+  position:relative;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.account-item__img{
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+
+  border:1px solid black;
+}
+
+.account-item__top{
+  display:flex;
+  flex-direction: row;
+
+  /* выравнивает контент по главной оси */
+  /* justify-content: center; */
+
+  /* выравнивает контент по второстепенной оси */
+  /* align-content: center; */
+
+  /* выравнивает внутри ячейки по второстепенной */
+  align-items: center;
+
+  /* расстояние между флекс-элементами */
+  /* ctrl / */
+  gap: 10px;
+}
+
+.account-item__bottom p{
+  margin: 0;
+  color:grey;
+}
+
+.account-item__bottom{
+  margin-top: 10px;
+}
+
+.account-item__bottom p span{
+  color:black;
+}
+
+.exit-link{
+  position:absolute;
+  bottom:20px;
+  right:20px;
+
+  color:#034b50;
+}
+
+.account-line{
+  display:flex;
+  gap: var(--gap-between-account-items);
+}
+
+.account-item-main{
+  background-image: linear-gradient(to right, rgba(255, 166, 0, 0.108),#034b5021);
+}
+
+
+.account-item__icon{
+  width:40px;
+  height: 40px;
+}
+
+.account-item__div-icon{
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid white;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
