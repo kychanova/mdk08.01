@@ -64,26 +64,39 @@
 									<form action="index.html">
 										<input type="number" placeholder="0">
 									</form>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
-									<a href="checkout.php?prod_id=$prod[product_id]" class="cart-btn"> Купить</a>
-									
-									<p><strong>Категория: </strong><a href="shop.php?category=$prod[category_id]">$prod[category_name]</a></p>
-								</div>
-								<h4>Share:</h4>
-								<ul class="product-share">
-									<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-									<li><a href=""><i class="fab fa-twitter"></i></a></li>
-									<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-									<li><a href=""><i class="fab fa-linkedin"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end single product -->
-
 			_PROD;
+
+		if ($prod['amount'] > 0){
+			$prod_section .= <<< _PROD
+								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
+								<a href="checkout.php?prod_id=$prod[product_id]" class="cart-btn"> Купить</a>
+								_PROD;
+		}
+		else{
+			$prod_section .= <<< _PROD
+								<h3>Товара нет на складе</h3>
+								_PROD;
+		}
+									
+									
+		$prod_section .= <<<_PROD
+							<p><strong>Категория: </strong><a href="shop.php?category=$prod[category_id]">$prod[category_name]</a></p>
+											</div>
+											<h4>Share:</h4>
+											<ul class="product-share">
+												<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+												<li><a href=""><i class="fab fa-twitter"></i></a></li>
+												<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+												<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+							<!-- end single product -->
+
+							_PROD;
 
 		
 		}

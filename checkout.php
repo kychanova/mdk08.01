@@ -1,11 +1,23 @@
 <?php
 	session_start();
-	print_r($_SESSION);
 	if (!isset($_SESSION['user'])){
-		header("Location:auth_suggest.php");
+		header("Location: auth.php");
 	}
 
-	include "components/header.php";
+	include "./components/header.php";
+
+	if (isset($_GET['prod_id'])){
+		$prod_id = $_GET['prod_id'];
+		$query = "SELECT product_name, price FROM products AS p JOIN prices as pc ON p.product_id = pc.product_id WHERE
+					p.product_id = '$prod_id' ORDER BY date_start DESC LIMIT 1";
+		$res = mysqli_query($conn, $query);
+
+		$row = mysqli_fetch_assoc($res);
+
+
+				 
+	}
+
 ?>
 	
 	<!-- breadcrumb-section -->
@@ -41,49 +53,16 @@
 						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 						      <div class="card-body">
 						        <div class="billing-address-form">
-						        	<form action="index.html">
-						        		<p><input type="text" placeholder="Name"></p>
-						        		<p><input type="email" placeholder="Email"></p>
-						        		<p><input type="text" placeholder="Address"></p>
-						        		<p><input type="tel" placeholder="Phone"></p>
+						        	<form action="controllers/place_order.php" id='place-order-form' method="POST">
+										<input type="hidden" name="prod_id" value=<?= $prod_id ?>>
+						        		<p><input type="text" placeholder="Address" name="address"></p>
 						        		<p><textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea></p>
 						        	</form>
 						        </div>
 						      </div>
 						    </div>
 						  </div>
-						  <div class="card single-accordion">
-						    <div class="card-header" id="headingTwo">
-						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						          Shipping Address
-						        </button>
-						      </h5>
-						    </div>
-						    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						      <div class="card-body">
-						        <div class="shipping-address-form">
-						        	<p>Your shipping address form is here.</p>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
-						  <div class="card single-accordion">
-						    <div class="card-header" id="headingThree">
-						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          Card Details
-						        </button>
-						      </h5>
-						    </div>
-						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						      <div class="card-body">
-						        <div class="card-details">
-						        	<p>Your card details goes here.</p>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
+
 						</div>
 
 					</div>
@@ -94,7 +73,7 @@
 						<table class="order-details">
 							<thead>
 								<tr>
-									<th>Your order Details</th>
+									<th>Детали заказа</th>
 									<th>Price</th>
 								</tr>
 							</thead>
@@ -104,34 +83,12 @@
 									<td>Total</td>
 								</tr>
 								<tr>
-									<td>Strawberry</td>
-									<td>$85.00</td>
-								</tr>
-								<tr>
-									<td>Berry</td>
-									<td>$70.00</td>
-								</tr>
-								<tr>
-									<td>Lemon</td>
-									<td>$35.00</td>
-								</tr>
-							</tbody>
-							<tbody class="checkout-details">
-								<tr>
-									<td>Subtotal</td>
-									<td>$190</td>
-								</tr>
-								<tr>
-									<td>Shipping</td>
-									<td>$50</td>
-								</tr>
-								<tr>
-									<td>Total</td>
-									<td>$240</td>
+									<td><?= $row['product_name'] ?></td>
+									<td><?= $row['price']?>руб.</td>
 								</tr>
 							</tbody>
 						</table>
-						<a href="#" class="boxed-btn">Place Order</a>
+						<input type="submit" class="boxed-btn" name='btn' value="Place Order" form="place-order-form">
 					</div>
 				</div>
 			</div>
