@@ -2880,3 +2880,22 @@ table.order-details tbody td {
 .account-item__client-data{
   color:black;
 }
+
+
+#input-td{
+  padding:0;
+}
+
+#checkout-number-input{
+  margin:0;
+  border:0;
+  width:100%;
+  height: 100%;
+}
+
+#checkout-number-input:focus-visible{
+  margin:0;
+  border:0;
+  width:100%;
+  height: 100%;
+}

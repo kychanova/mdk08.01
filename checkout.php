@@ -38,6 +38,14 @@
 	<div class="checkout-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
+				<h5>
+					<?php
+						echo $_SESSION['order_message'] ?? '';
+						unset($_SESSION['order_message']);
+					?>
+				</h5>
+			</div>
+			<div class="row">
 				<div class="col-lg-8">
 					<div class="checkout-accordion-wrap">
 						<div class="accordion" id="accordionExample">
@@ -55,6 +63,7 @@
 						        <div class="billing-address-form">
 						        	<form action="controllers/place_order.php" id='place-order-form' method="POST">
 										<input type="hidden" name="prod_id" value=<?= $prod_id ?>>
+										<input type="hidden" name="amount" value=<?= $_POST['amount'] ?>>
 						        		<p><input type="text" placeholder="Address" name="address"></p>
 						        		<p><textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea></p>
 						        	</form>
@@ -73,18 +82,21 @@
 						<table class="order-details">
 							<thead>
 								<tr>
-									<th>Детали заказа</th>
-									<th>Price</th>
+									<th colspan=3>Детали заказа</th>
 								</tr>
 							</thead>
 							<tbody class="order-details-body">
 								<tr>
-									<td>Product</td>
-									<td>Total</td>
+									<td>Товар</td>
+									<td>Цена</td>
+									<td>Количество</td>
 								</tr>
 								<tr>
 									<td><?= $row['product_name'] ?></td>
 									<td><?= $row['price']?>руб.</td>
+									<td id="input-td">
+										<input id="checkout-number-input" type="number" value=<?= $_POST['amount'] ?? ''?> >
+									</td>
 								</tr>
 							</tbody>
 						</table>

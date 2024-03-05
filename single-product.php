@@ -61,8 +61,8 @@
 								<p class="single-product-pricing"><span>За $prod[unit_name]</span> $prod[price]</p>
 								<p>$prod[description]</p>
 								<div class="single-product-form">
-									<form action="index.html">
-										<input type="number" placeholder="0">
+									<form action="checkout.php?prod_id=$prod[product_id]"  id="number-form" method="POST">
+										<input type="number" placeholder="0" min=1  max=$prod[amount] required value="1" name="amount">
 									</form>
 			_PROD;
 
@@ -70,6 +70,7 @@
 			$prod_section .= <<< _PROD
 								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Добавить в корзину</a>
 								<a href="checkout.php?prod_id=$prod[product_id]" class="cart-btn"> Купить</a>
+								<input type="submit" name="btn" value="Купить" class="cart-btn" form="number-form">
 								_PROD;
 		}
 		else{
