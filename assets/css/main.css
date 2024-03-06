@@ -2895,8 +2895,29 @@ table.order-details tbody td {
   height: 80px;
   border-radius: 50%;
   border: 3px solid white;
-
   display:flex;
   justify-content: center;
   align-items: center;
+}
+
+.account-item__div-icon-skid{
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #034b5021;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-item__text{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 150%;
+}
+
+.vikup_size{
+  font-size: 130%;
 }

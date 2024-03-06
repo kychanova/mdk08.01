@@ -45,6 +45,20 @@
 
 		if ($prod = mysqli_fetch_assoc($res)){
 
+			if ($prod['amount'] > 0){
+				$buttons =  <<<_PROD
+								<form action="checkout.php" id='prod-count-form' method='POST'>
+										<input type='hidden' name='product_id' value=$prod[product_id]>
+										<input type="number" placeholder="1" min=1 max=$prod[amount] name='amount'>
+								</form>
+								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+								<input type="submit" value="Купить в один клик" name='buy-btn' form='prod-count-form' >
+								_PROD;
+			}
+			else{
+				$buttons = "<h3>Товара нет на складе</h3>";
+			}
+
 		$prod_section = <<< _PROD
 			<!-- single product -->
 			<div class="single-product mt-150 mb-150">
@@ -61,10 +75,9 @@
 								<p class="single-product-pricing"><span>За $prod[unit_name]</span> $prod[price]</p>
 								<p>$prod[description]</p>
 								<div class="single-product-form">
-									<form action="index.html">
-										<input type="number" placeholder="0">
-									</form>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+									
+									
+									$buttons
 									<p><strong>Категория: </strong><a href="shop.php?category=$prod[category_id]">$prod[category_name]</a></p>
 								</div>
 								<h4>Share:</h4>
