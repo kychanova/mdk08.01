@@ -13,6 +13,10 @@ else{
 	$client_data = mysqli_fetch_array($res);
 
 	print_r($client_data);
+
+	$query = "SELECT o.order_id, image_path FROM orders AS o JOIN order_prods AS op ON o.order_id = op.order_id JOIN products AS p ON p.product_id = op.prod_id WHERE client_id='$_SESSION[user]';";
+	$res_orders = mysqli_query($conn, $query);
+
 }
 ?>
 <div class="breadcrumb-section">
@@ -62,6 +66,28 @@ else{
 	<div class="account-line">
 		<div class="account-item account-item-2">
 			<h4>Заказы</h4>
+			<div class='order-row'>
+				<?php
+				$num_orders = mysqli_num_rows($res_orders);
+				$count_dif = $num_orders - 5;
+				$count_orders_circle = '';
+				if ($count_dif > 0){
+					$iteration_count = 5;
+					$count_orders_circle = "<a href='orders.php' class='account-order__a'><div class='count-circle'>+$count_dif</div></a>";
+				}
+				else{
+					$iteration_count = $num_orders;
+				}
+				for ($i = 0; $i < 5;$i++){
+					$row = mysqli_fetch_array($res_orders);
+					echo "<a href='orders.php#$row[order_id]' class='account-order__a'><img class='account-order__img' src='assets/img/products/$row[image_path]'></a>";
+				}
+				echo $count_orders_circle;
+
+
+
+				?>
+			</div>
 		</div>
 		<div class="account-item account-item-2">
 			<h4>Избранное</h4>

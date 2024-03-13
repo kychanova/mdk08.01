@@ -55,9 +55,6 @@
 					<ul>
 						<?php 
 							$class = $actual_cat == -1 ? 'active' : '';
-							echo "<pre>";
-							print_r($_GET);
-							echo "</pre>";
 						?>
 						
 						
@@ -71,7 +68,7 @@
 								$name = mb_convert_case($cat['category_name'], MB_CASE_TITLE, 'UTF-8');
 								$html = <<<_ITEM
 
-								<li class="active"><a href='shop.php?category=$cat[category_id]'>$name</a></li>
+								<li class="$class"><a href='shop.php?category=$cat[category_id]'>$name</a></li>
 
 								_ITEM;
 								echo $html;
@@ -108,7 +105,7 @@
 									</a>
 								</div>
 								<h3>$prod[product_name]</h3>
-								<p class="product-price"><span>За $prod[unit].</span> $prod[price]руб. </p>
+								<p class="product-price"><span>За $prod[unit_name].</span> $prod[price]руб. </p>
 								<a href="cart.html" class="cart-btn">
 									<i class="fas fa-shopping-cart"></i> Добавить в корзину
 								</a>

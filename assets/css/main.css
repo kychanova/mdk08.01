@@ -2899,3 +2899,55 @@ table.order-details tbody td {
   width:100%;
   height: 100%;
 }
+
+.account-order__img{
+  width:50px;
+  border-radius:50%;
+  border:2px solid lightgrey;
+}
+
+.account-order__img + .account-order__img{
+  /* margin-left:-20px; */
+}
+
+.count-circle{
+  border-radius: 50%;
+  width:50px;
+  height: 50px;
+ 
+  background-color: white;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  border:2px solid lightgrey;
+}
+
+
+.order-row{
+  display:flex;
+}
+
+.account-order__a + .account-order__a{
+  margin-left:-20px;
+}
+
+
+/* -----------------------------------------------------------------------------
+
+# Orders Page Styles
+
+----------------------------------------------------------------------------- */
+
+.order-section{
+  padding:30px 100px;
+}
+
+.order-item{
+  padding:20px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
+  margin-bottom:20px;
+}
