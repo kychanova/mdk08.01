@@ -49,7 +49,7 @@
 				$buttons =  <<<_PROD
 								<form action="checkout.php" id='prod-count-form' method='POST'>
 										<input type='hidden' name='product_id' value=$prod[product_id]>
-										<input type="number" placeholder="1" min=1 max=$prod[amount] name='amount'>
+										<input type="number" value=1 min=1 max=$prod[amount] name='amount' required>
 								</form>
 								<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 								<input type="submit" value="Купить в один клик" name='buy-btn' form='prod-count-form' >
